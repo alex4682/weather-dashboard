@@ -5,7 +5,7 @@ import sunny from "../../img/sunny.png";
 import './Search.scss';
 
 export const SearchItem = ({ city = '', country = '', time = '', date = '', weekDay = '', temp = null, icon = null, description = '' }) => {
-    const displayTemp = (temp === null || temp === undefined || Number.isNaN(Number(temp))) ? '—' : temp;
+    const displayTemp = temp == -0? '0' : (temp === null || temp === undefined || Number.isNaN(Number(temp))) ? '—' : temp;
     const iconSrc = ` https://openweathermap.org/img/wn/${icon}@2x.png`;
     const iconAlt = description ? `${description} for ${city}` : `Weather icon for ${city}`;
 
@@ -15,7 +15,7 @@ export const SearchItem = ({ city = '', country = '', time = '', date = '', week
                 <p>{city}</p>
                 <p>{country}</p>
             </div>
-            <h2>{time}{time && !String(time).includes(':') ? ':00' : ''}</h2>
+            <h2>{time}:00</h2>
             <div className="forecast-wrap">
                 <button type="button" aria-label="Show hourly forecast">Hourly forecast</button>
                 <button type="button" aria-label="Show weekly forecast">Weekly forecast</button>

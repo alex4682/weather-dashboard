@@ -15,3 +15,14 @@
   object-fit: cover;
   border-radius: 6px;
 }
+
+.nature-title {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: black;
+  margin-top: 80px;
+}

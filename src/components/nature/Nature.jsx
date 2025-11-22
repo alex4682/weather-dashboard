@@ -13,7 +13,9 @@ export const Nature = () => {
     const images = [img1, img2, img3, img4, img5];
 
     return (
-        <Splide
+        <section className="container">
+            <h2 className="nature-title">Beautiful nature</h2>
+            <Splide
             options={{
                 type: "loop",
                 focus: "center",
@@ -33,6 +35,6 @@ export const Nature = () => {
                     <img src={src} className="nature-img" alt="" />
                 </SplideSlide>
             ))}
-        </Splide>
+        </Splide></section>
     );
 };

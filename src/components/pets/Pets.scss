@@ -1,0 +1,49 @@
+.pets{
+    margin-top: 90px !important;
+}
+
+.pets-item {
+    width: 270px;
+
+    & h3 {
+        font-size: 1.2rem;
+        margin: 0.5rem 0;
+    }
+
+    & img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        height: 200px;
+
+    }
+}
+
+.pets-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.pets-btn {
+    border: none;
+    width: 138;
+    height: 40;
+    opacity: 1;
+    top: 1617px;
+    left: 150px;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    gap: 10px;
+    background-color: #FFB36C;
+    color: black;
+
+}
+.pets-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}

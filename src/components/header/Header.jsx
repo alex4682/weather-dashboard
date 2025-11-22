@@ -1,9 +1,10 @@
 import logo from '../../img/logo.png';
 import userPhoto from '../../img/user-photo.png';
+import './Header.scss';
 
 export const Header = () => {
     return (
-        <header className="header">
+        <header className="header container">
             <div className="nav">
                 <img src={logo} alt="logo" />
                 <ul className="nav-list">

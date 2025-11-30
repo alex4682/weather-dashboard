@@ -3,29 +3,38 @@
   justify-content: space-between;
   align-items: center;
 }
-.nav-item a{
+
+.nav-item a {
   font-family: Montserrat Alternates;
   font-weight: 500;
   font-style: Medium;
   font-size: 12px;
   line-height: 100%;
   color: black;
+
+  &:hover {
+    color: #ffa14a;
+  }
 }
+
 .nav-list {
   display: flex;
   gap: 45px;
   list-style: none;
 }
+
 .nav {
   display: flex;
   align-items: center;
   gap: 111px;
 }
+
 .sign-in {
   display: flex;
   align-items: center;
   gap: 27px;
 }
+
 .sign-in-btn {
   border: none;
   width: 89;
@@ -36,5 +45,240 @@
   padding-bottom: 10px;
   padding-left: 20px;
   gap: 10px;
+  cursor: pointer;
   background-color: #ffb36c;
+
+  &:hover {
+    background-color: #ffa14a;
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  &.active {
+    display: flex;
+  }
+}
+
+.modal {
+  background-color: #fff;
+  width: 600px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  gap: 40px;
+  padding: 28px;
+}
+
+.signin-modal-form-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+
+  & input {
+    width: 440px;
+    height: 50px;
+    background-color: #e4e4e4;
+    border: none;
+    border-radius: 10px;
+    padding-left: 20px;
+    font-family: Montserrat;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #ababab;
+  }
+
+  & label {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+    color: black;
+  }
+}
+
+.modal-title {
+  font-family: Montserrat Alternates;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 24px;
+  line-height: 100%;
+  color: black;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+
+  & button {
+    width: 114px;
+    height: 37px;
+    opacity: 1;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    gap: 10px;
+    background-color: #ffb36c;
+    border: none;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ffa14a;
+    }
+  }
+}
+
+.log-in {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: black;
+
+  & span {
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.unlogin-modal-form-wrap{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  & button {
+    width: 114px;
+    height: 37px;
+    opacity: 1;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    gap: 10px;
+    background-color: #ffb36c;
+    border: none;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ffa14a;
+    }
+  }
+}
+
+.modal-unlogin {
+  background-color: #fff;
+  width: 400px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  gap: 40px;
+  padding: 28px;
+}
+
+.modal-group{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  & label{
+    font-family: Montserrat;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+    color: black;
+  }
+  & input{
+    width: 440px;
+    height: 50px;
+    background-color: #e4e4e4;
+    border: none;
+    border-radius: 10px;
+    padding-left: 20px;
+    font-family: Montserrat;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #ababab;
+  }
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+
+  & button {
+    width: 114px;
+    height: 37px;
+    opacity: 1;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    gap: 10px;
+    background-color: #ffb36c;
+    border: none;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ffa14a;
+    }
+  }
+}
+
+.login-modal{
+  background-color: #fff;
+  width: 600px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  gap: 40px;
+  padding: 28px;
+}
+.username{
+  font-family: 'Montserrat Alternates';
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 100%;
+  color: black;
 }

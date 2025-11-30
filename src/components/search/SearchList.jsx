@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 import { SearchItem } from './SearchItem';
+import { SeeMore } from './SeeMore';
 import './Search.scss';
 
-export const SearchList = ({ searchQuery = "Prague" }) => {
+export const SearchList = ({ searchQuery, isLoggined }) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const [isActive, setIsActive] = useState(false);
+    const [seeMoreDay, setSeeMoreDay] = useState(null);
+    const [hourlyDay, setHourlyDay] = useState(null);
+    const [hourlyIsActive, setHourlyIsActive] = useState(false)
     const apikey = "425a7152fd4aec5354729bd963878955";
-    const api = `https://api.openweathermap.org/data/2.5/forecast?q=${searchQuery}&units=metric&appid=${apikey}`;
 
     const getCountryName = (code) => {
         if (!code) return '';
@@ -21,23 +24,34 @@ export const SearchList = ({ searchQuery = "Prague" }) => {
     };
 
     useEffect(() => {
+        let active = true;
         setLoading(true);
 
+        const queryFromProp = searchQuery && String(searchQuery).trim();
+        const fallback = (() => {
+            try { return localStorage.getItem('lastSearch'); } catch { return null; }
+        })();
+        const query = queryFromProp || fallback || 'Prague';
+        const api = `https://api.openweathermap.org/data/2.5/forecast?q=${query}&units=metric&appid=${apikey}`;
         fetch(api)
             .then(response => {
                 if (!response.ok) throw new Error(`API error ${response.status}`);
                 return response.json();
             })
             .then(data => {
+                if (!active) return;
                 setData(data);
                 setError(null);
             })
             .catch(error => {
+                if (!active) return;
                 setError(error.message);
                 setData(null);
             })
-            .finally(() => setLoading(false));
-    }, [api]);
+            .finally(() => { if (active) setLoading(false); });
+
+        return () => { active = false; };
+    }, [searchQuery, apikey]);
 
     if (loading) return <ul className="search-list container"><li>Loading...</li></ul>;
     if (error) return <ul className="search-list container"><li>Error: {error}</li></ul>;
@@ -79,10 +93,29 @@ export const SearchList = ({ searchQuery = "Prague" }) => {
     const day1 = getForecastForDay(1);
     const day2 = getForecastForDay(2);
 
+    const getForecastData = (dayOffset) => {
+        const item = getForecastForDay(dayOffset);
+        return {
+            feelsLike: item.main.feels_like.toFixed(0),
+            minTemp: item.main.temp_min.toFixed(0) - 5,
+            maxTemp: parseInt(item.main.temp_max.toFixed(0)) + 5,
+            humidity: item.main.humidity,
+            pressure: item.main.pressure,
+            windSpeed: item.wind.speed,
+            visibility: item.visibility / 1000
+        };
+    };
+
     const renderSearchItem = (forecast, dayOffset) => {
         const dateObj = getDateOffset(dayOffset);
         return (
             <SearchItem
+                setHourlyDay={setHourlyDay}
+                setHourlyIsActive={setHourlyIsActive}
+                setSeeMoreDay={setSeeMoreDay}
+                isActive={isActive}
+                setIsActive={setIsActive}
+                isLoggined={isLoggined}
                 key={dayOffset}
                 city={data.city?.name}
                 country={getCountryName(getCountryCode())}
@@ -92,15 +125,51 @@ export const SearchList = ({ searchQuery = "Prague" }) => {
                 temp={forecast.main?.temp?.toFixed(0)}
                 icon={forecast.weather?.[0]?.icon}
                 description={forecast.weather?.[0]?.main}
+                day={dayOffset}
+            />
+        );
+    };
+    const renderSeeMore = (dayOffset) => {
+        if (dayOffset === null) return null;
+
+        const info = getForecastData(dayOffset);
+
+        return (
+            <SeeMore
+                feelsLike={info.feelsLike}
+                minTemp={info.minTemp}
+                maxTemp={info.maxTemp}
+                humidity={info.humidity}
+                pressure={info.pressure}
+                windSpeed={info.windSpeed}
+                visibility={info.visibility}
             />
         );
     };
 
+    const getHourlyData = () => {
+    return data.list.slice(0, 8).map(item => {
+        const date = new Date(item.dt * 1000);
+        return {
+            time: date.toLocaleTimeString("uk-UA", { hour: "2-digit", minute: "2-digit" }),
+            temp: item.main.temp.toFixed(0),
+        };
+    });
+};
+
     return (
-        <ul className="search-list container">
+        <><ul className="search-list container">
             {renderSearchItem(day0, 0)}
             {renderSearchItem(day1, 1)}
             {renderSearchItem(day2, 2)}
         </ul>
+            {isActive ?
+                 renderSeeMore(seeMoreDay)  : null
+            }
+            {hourlyIsActive?  
+            null: null
+
+            }
+        </>
     );
 };

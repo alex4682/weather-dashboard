@@ -41,6 +41,10 @@
     gap: 10px;
     background-color: #FFB36C;
     color: black;
+    &:hover {
+        background-color: #FFA14A;
+        cursor: pointer;
+    }
 
 }
 .pets-title {

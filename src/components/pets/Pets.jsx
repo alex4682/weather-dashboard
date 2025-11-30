@@ -11,25 +11,54 @@ export const Pets = () => {
     const [error, setError] = useState(null);
 
     const apikey = "5b3ff3eb33494302bba0b2f1d0e69902";
-    const api = `https://newsapi.org/v2/everything?q=pets&from=2025-10-22&sortBy=publishedAt&apiKey=${apikey}&page=1&pageSize=4&searchIn=title`;
 
     useEffect(() => {
+        let active = true;
         setLoading(true);
-        fetch(api)
-            .then(response => {
-                if (!response.ok) throw new Error(`API error ${response.status}`);
-                return response.json();
-            })
-            .then(data1 => {
-                setData(data1);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                setError(error.message);
-                setLoading(false);
-            });
-    }, [api]);
+
+        const fromDate = new Date();
+        fromDate.setDate(fromDate.getDate() - 7);
+        const from = fromDate.toISOString().split('T')[0];
+
+        const params = new URLSearchParams({
+            q: 'pet',
+            sortBy: 'publishedAt',
+            apiKey: apikey,
+            page: '1',
+            pageSize: '4',
+            searchIn: 'title'
+        });
+
+        const url = `https://newsapi.org/v2/everything?${params.toString()}`;
+
+        (async () => {
+            try {
+                const res = await fetch(url);
+                const text = await res.text();
+                let json = null;
+                try { json = JSON.parse(text); } catch {}
+
+                if (!res.ok) {
+                    let msg = `NewsAPI error ${res.status}`;
+                    if (json?.message) msg += ` - ${json.message}`;
+                    else if (text) msg += ` - ${text}`;
+                    throw new Error(msg);
+                }
+
+                if (!active) return;
+                setData(json);
+                setError(null);
+            } catch (err) {
+                console.error('Error fetching news:', err);
+                if (active) setError(err.message || 'Failed to fetch news');
+                if (active) setData(null);
+            } finally {
+                if (active) setLoading(false);
+            }
+        })();
+
+        return () => { active = false; };
+    }, [apikey]);
 
     if (loading) return <section className="pets"><p>Loading pets news...</p></section>;
     if (error) return <section className="pets"><p>Error: {error}</p></section>;

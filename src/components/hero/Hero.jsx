@@ -16,8 +16,10 @@ export const Hero = ({ searchResult, setSearchResult }) => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        if (searchQuery.trim() !== "") {
-            setSearchResult(searchQuery);
+        const trimmed = searchQuery.trim();
+        if (trimmed !== "") {
+            setSearchResult(trimmed);
+            try { localStorage.setItem('lastSearch', trimmed); } catch {}
         }
     };
 

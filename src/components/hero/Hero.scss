@@ -75,6 +75,9 @@
   letter-spacing: 0%;
   color: #000000;
   background-color: #D9D9D9;
+  &:focus{
+    background-color: #FFA14A;
+  }
 }
 .hero-search-btn{
   width: 40px;
@@ -91,5 +94,9 @@
     width: 20px ;
     height: 20px;
     background: none;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: #FFA14A;
   }
 }

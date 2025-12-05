@@ -1,7 +1,7 @@
 import symbolDefs from "../../img/symbol-defs.svg";
 import './Search.scss';
 
-export const SearchItem = ({setHourlyDay, setHourlyIsActive, setSeeMoreDay, isActive, setIsActive, isLoggined, city = '', day, country = '', time = '', date = '', weekDay = '', temp = null, icon = null, description = '' }) => {
+export const SearchItem = ({ setWeeklyIsActive, setHourlyDay, setHourlyIsActive, setSeeMoreDay, isActive, setIsActive, isLoggined, city = '', day, country = '', time = '', date = '', weekDay = '', temp = null, icon = null, description = '' }) => {
     const displayTemp = temp == -0 ? '0' : (temp === null || temp === undefined || Number.isNaN(Number(temp))) ? '—' : temp;
     const iconSrc = `https://openweathermap.org/img/wn/${icon}@2x.png`;
     const iconAlt = description ? `${description} for ${city}` : `Weather icon for ${city}`;
@@ -16,18 +16,23 @@ export const SearchItem = ({setHourlyDay, setHourlyIsActive, setSeeMoreDay, isAc
             {!isLoggined ? null :
                 <div className="forecast-wrap">
                     <button
-    type="button"
-    aria-label="Show hourly forecast"
-    onClick={() => {
-        setHourlyIsActive(true);
-        setIsActive(false);
-        setHourlyDay(day);
-    }}
->
-    Hourly forecast
-</button>
+                        type="button"
+                        aria-label="Show hourly forecast"
+                        onClick={() => {
+                            setHourlyIsActive(true);
+                            setIsActive(false);
+                            setHourlyDay(day);
+                            setWeeklyIsActive(false);
+                        }}
+                    >
+                        Hourly forecast
+                    </button>
 
-                    <button type="button" aria-label="Show weekly forecast">Weekly forecast</button>
+                    <button type="button" aria-label="Show weekly forecast" onClick={()=>{
+                        setWeeklyIsActive(true);
+                        setIsActive(false);
+                        setHourlyIsActive(false);
+                    }}>Weekly forecast</button>
                 </div>
             }
             <div className="date-wrap">
@@ -50,7 +55,8 @@ export const SearchItem = ({setHourlyDay, setHourlyIsActive, setSeeMoreDay, isAc
                 <button type="button" aria-label="See more details" onClick={() => {
                     setIsActive(true)
                     setSeeMoreDay(day);
-                    setHourlyIsActive(false)
+                    setHourlyIsActive(false);
+                    setWeeklyIsActive(false);
                 }}>See More</button>
                 <button type="button" aria-label="Delete">
                     <svg className="icon icon-trash-2" width="24" height="24" viewBox="0 0 24 24">

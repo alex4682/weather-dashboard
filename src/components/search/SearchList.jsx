@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { SearchItem } from './SearchItem';
 import { SeeMore } from './SeeMore';
+import { Hourly } from './Hourly';
+import { Weekly } from './Weekly';
 import './Search.scss';
 
 export const SearchList = ({ searchQuery, isLoggined }) => {
@@ -10,7 +12,8 @@ export const SearchList = ({ searchQuery, isLoggined }) => {
     const [isActive, setIsActive] = useState(false);
     const [seeMoreDay, setSeeMoreDay] = useState(null);
     const [hourlyDay, setHourlyDay] = useState(null);
-    const [hourlyIsActive, setHourlyIsActive] = useState(false)
+    const [hourlyIsActive, setHourlyIsActive] = useState(false);
+    const [weaklyIsActive, setWeeklyIsActive] = useState(false);
     const apikey = "425a7152fd4aec5354729bd963878955";
 
     const getCountryName = (code) => {
@@ -110,6 +113,7 @@ export const SearchList = ({ searchQuery, isLoggined }) => {
         const dateObj = getDateOffset(dayOffset);
         return (
             <SearchItem
+                setWeeklyIsActive={setWeeklyIsActive}
                 setHourlyDay={setHourlyDay}
                 setHourlyIsActive={setHourlyIsActive}
                 setSeeMoreDay={setSeeMoreDay}
@@ -146,16 +150,75 @@ export const SearchList = ({ searchQuery, isLoggined }) => {
             />
         );
     };
+    const renderWeekly = (getDate) => {
+        if (!weaklyIsActive) return null;
+        return <Weekly
+            weeklyData={getWeeklyData(getDate)}
+        />;
+    }
+    const getHourlyData = (dayOffset) => {
+        const start = new Date();
+        start.setHours(0, 0, 0, 0);
+        start.setDate(start.getDate() + dayOffset);
 
-    const getHourlyData = () => {
-    return data.list.slice(0, 8).map(item => {
-        const date = new Date(item.dt * 1000);
-        return {
-            time: date.toLocaleTimeString("uk-UA", { hour: "2-digit", minute: "2-digit" }),
-            temp: item.main.temp.toFixed(0),
-        };
-    });
+        const end = new Date(start);
+        end.setDate(end.getDate() + 1);
+
+        const filtered = data.list.filter(item => {
+            const t = item.dt * 1000;
+            return t >= start.getTime() && t < end.getTime();
+        });
+
+        const result = [];
+        for (let h = 0; h < 24; h++) {
+            const hourDate = new Date(start);
+            hourDate.setHours(h);
+
+            const forecast = filtered.find(item => {
+                const t = new Date(item.dt * 1000);
+                return t.getHours() === h;
+            });
+
+            result.push({
+                time: hourDate.toLocaleTimeString("uk-UA", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                }),
+                temp: forecast
+                    ? Number(forecast.main.temp.toFixed(0))
+                    : null
+            });
+        }
+
+        return result;
+    };
+    const getWeeklyData = () => {
+    const result = [];
+    for (let d = 0; d < 8; d++) {
+        const forecast = getForecastForDay(d);
+        if (!forecast) continue;
+
+        result.push({
+            date: new Date(forecast.dt * 1000).toLocaleDateString("en-US", { weekday: "short", day: "numeric", month: "short" }),
+            temp: forecast.main?.temp.toFixed(0),
+            feels_like: forecast.main?.feels_like.toFixed(0),
+            icon: forecast.weather?.[0]?.icon,
+            weather: forecast.weather || []
+        });
+    }
+    return result;
 };
+
+
+
+
+
+    const renderHourly = (dayOffset) => {
+        if (dayOffset === null) return null;
+        return <Hourly hourlyData={getHourlyData(dayOffset)} />;
+    };
+
+
 
     return (
         <><ul className="search-list container">
@@ -164,12 +227,15 @@ export const SearchList = ({ searchQuery, isLoggined }) => {
             {renderSearchItem(day2, 2)}
         </ul>
             {isActive ?
-                 renderSeeMore(seeMoreDay)  : null
+                renderSeeMore(seeMoreDay) : null
             }
-            {hourlyIsActive?  
-            null: null
+            {hourlyIsActive ?
+                renderHourly(hourlyDay) : null
 
             }
+            {weaklyIsActive ?
+                renderWeekly(hourlyDay) 
+                : null}
         </>
     );
 };

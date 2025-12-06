@@ -7,10 +7,7 @@ export const Hourly = ({ hourlyData }) => {
 
     useEffect(() => {
         if (!hourlyData) return;
-
-        if (chartRef.current) {
-            chartRef.current.destroy();
-        }
+        if (chartRef.current) chartRef.current.destroy();
 
         const ctx = canvasRef.current.getContext("2d");
 
@@ -21,39 +18,33 @@ export const Hourly = ({ hourlyData }) => {
                 datasets: [
                     {
                         label: "Temperature (°C)",
-                        data: hourlyData.map(d => d.temp),
-                        borderWidth: 2,
+                        data: hourlyData.map(d => d.temp),  // <-- FIX
+                        borderWidth: 3,
                         spanGaps: true,
-                        cubicInterpolationMode: "monotone",
                         tension: 0.4,
                         borderColor: "orange",
                         backgroundColor: "rgba(255,165,0,0.25)",
-                        fill: true,
                         pointRadius: 3,
                         pointBackgroundColor: "orange",
-                        legend: {
-                            display: false
-                        }
-                    }
-                ]
+                    },
+                ],
             },
             options: {
                 responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
                 scales: {
                     y: { beginAtZero: false }
                 }
             }
         });
 
-
-        return () => {
-            if (chartRef.current) chartRef.current.destroy();
-        };
+        return () => chartRef.current?.destroy();
     }, [hourlyData]);
 
     return (
-        <div
-            className="container"
+        <div className="container"
             style={{
                 marginTop: "80px",
                 background: "#e8e8e8",

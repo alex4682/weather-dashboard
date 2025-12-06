@@ -7,13 +7,13 @@ import img2 from "../../img/img2.png";
 import img3 from "../../img/img3.png";
 import img4 from "../../img/img4.png";
 import img5 from "../../img/img5.png";
-import "./Nature.css";
+import "./Nature.scss";
 
 export const Nature = () => {
     const images = [img1, img2, img3, img4, img5];
 
     return (
-        <section className="container">
+        <section className="container nature">
             <h2 className="nature-title">Beautiful nature</h2>
             <Splide
             options={{

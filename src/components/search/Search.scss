@@ -14,6 +14,16 @@
     background-color: #E8E8E8;
     border-radius: 8px;
     width: 320px;
+    @media screen and (max-width: 1440px){
+        &:nth-child(3){
+            display: none;
+        }
+    }
+    @media screen and (max-width: 768px){
+        &:nth-child(2){
+            display: none;
+        }
+    }
 }
 
 .city-wrap,
@@ -29,7 +39,16 @@
 .city-wrap {
     justify-content: space-between;
 
+    & p {
+        font-family: Montserrat;
+        font-weight: 500;
+        font-style: Medium;
+        font-size: 14px;
+        leading-trim: NONE;
+        line-height: 100%;
+        letter-spacing: 0%;
 
+    }
 }
 
 .forecast-wrap {
@@ -191,7 +210,7 @@
     flex-wrap: wrap;
     gap: 40px;
     justify-content: center;
-    padding: 40px;
+    padding: 30px !important;
     background-color: #E8E8E8;
     border-radius: 20px;
 
@@ -236,21 +255,64 @@
             height: 100px;
         }
     }
+    @media screen and (max-width: 768px){
+        gap: 20px;
+        width: 300px;
+        
+    }
 }
 
 .weekly-forecast {
-    margin-top: 80px;
+    margin-top: 80px !important;
 
     &>div {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 60px;
         gap: 10px;
+        padding: 30px;
     }
-    padding: 40px;
+
     background-color: #E8E8E8;
     border-radius: 20px;
+    @media screen and (max-width: 1440px){
+        &>div{
+            width: 100%;
+        }
+        & .weekly-card{
+            width: 564px;
+            height: 44px;
+        }
+    }
+    @media screen and (max-width: 768px){
+        padding: 15px !important;
+        &>div{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width:400px;
+            gap: 40px;
+            align-items: center;
+        }
+        & .weekly-card{
+            width: 150px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            & p{
+                text-align: center;
+            }
+            & .icon-temp-wrap{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        
+    }
 }
 
 .weekly-card {

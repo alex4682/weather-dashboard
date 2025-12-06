@@ -5,7 +5,7 @@ import { SearchList } from './components/search/SearchList';
 import { Pets } from './components/pets/Pets';
 import { Nature } from './components/nature/Nature';
 import { Footer } from './components/footer/Footer';
-import './main.css';
+import './main.scss';
 
 function App() {
     

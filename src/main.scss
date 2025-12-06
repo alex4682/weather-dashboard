@@ -1,6 +1,15 @@
 .container{
     max-width: 1200px;
     margin: 0 auto;
+    @media screen and (max-width: 1440px){
+        padding: 0 15px;
+        max-width: 768px;
+        
+    }
+    @media screen and (max-width: 768px){
+        padding: 0 10px;
+        max-width: 420px;
+    }
 }
 a{
     text-decoration: none;

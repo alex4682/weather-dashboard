@@ -2,7 +2,117 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  & .nav-modal {
+    display: flex;
+    gap: 100px;
+  }
+
+  & .burger-menu {
+    display: none;
+  }
+
+  @media screen and (max-width: 1440px) {
+    & .nav-item a {
+      font-family: Montserrat Alternates;
+      font-weight: 500;
+      font-style: Medium;
+      font-size: 10px;
+      line-height: 100%;
+      letter-spacing: 0%;
+
+    }
+
+    & .nav-list {
+      gap: 25px;
+    }
+
+    & .sign-in-btn {
+      width: 70px;
+      height: 30px;
+      padding-top: 8px;
+      padding-right: 15px;
+      padding-bottom: 8px;
+      padding-left: 15px;
+      font-size: 10px;
+    }
+
+    & .username {
+      font-size: 16px;
+    }
+
+    & .modal {
+      width: 500px;
+      height: 450px;
+      gap: 15px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    & .nav-list {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    & .sign-in {
+      flex-direction: column-reverse;
+      gap: 15px;
+
+    }
+
+    & .mobile-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    & .burger-menu {
+      display: flex;
+      background-color: transparent;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    display: flex;
+    flex-direction: column;
+
+    & .nav-modal {
+      padding: 15px 40px 15px 40px;
+      background-color: #E6E6E6;
+      display: none;
+      width: 100vw;
+      height: 150px;
+      gap: 10px;
+      justify-content: space-between;
+      box-shadow: inset 0px 2px 12px rgba(0, 0, 0, 0.3);
+
+      &.active {
+        display: flex;
+      }
+    }
+
+    & .modal {
+      width: 90%;
+      height: 460px;
+
+      & .signin-modal-form-wrap input {
+        width: 100%;
+      }
+
+      & .modal-form button {
+        width: 100%;
+      }
+
+      & .login-modal {
+        width: 90%;
+        height: 60vh;
+      }
+    }
+  }
 }
+
 
 .nav-item a {
   font-family: Montserrat Alternates;
@@ -168,11 +278,12 @@
   }
 }
 
-.unlogin-modal-form-wrap{
+.unlogin-modal-form-wrap {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+
   & button {
     width: 114px;
     height: 37px;
@@ -206,11 +317,12 @@
   padding: 28px;
 }
 
-.modal-group{
+.modal-group {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  & label{
+
+  & label {
     font-family: Montserrat;
     font-weight: 500;
     font-style: Medium;
@@ -220,7 +332,8 @@
 
     color: black;
   }
-  & input{
+
+  & input {
     width: 440px;
     height: 50px;
     background-color: #e4e4e4;
@@ -237,7 +350,7 @@
   }
 }
 
-.login-form{
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -264,7 +377,7 @@
   }
 }
 
-.login-modal{
+.login-modal {
   background-color: #fff;
   width: 600px;
   height: 400px;
@@ -275,7 +388,8 @@
   gap: 40px;
   padding: 28px;
 }
-.username{
+
+.username {
   font-family: 'Montserrat Alternates';
   font-weight: 600;
   font-size: 20px;

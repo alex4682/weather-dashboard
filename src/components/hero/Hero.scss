@@ -5,6 +5,81 @@
   background-position: center;
   height: 595px;
   margin-bottom: 90px;
+
+  @media screen and (max-width: 1440px) {
+    & .hero-title {
+      font-family: Montserrat;
+      font-weight: 600;
+      font-style: SemiBold;
+      font-size: 20px;
+      leading-trim: NONE;
+      line-height: 100%;
+      letter-spacing: 0%;
+
+    }
+
+    & .hero-text {
+      font-family: Montserrat;
+      font-weight: 500;
+      font-style: Medium;
+      font-size: 16px;
+      leading-trim: NONE;
+      line-height: 100%;
+      letter-spacing: 0%;
+      width: 94px;
+      line-height: 20px;
+
+      &:first-child {
+        padding-right: 26px;
+        border-right: 2px solid #FFFFFF;
+        width: 172px;
+      }
+
+      &:last-child {
+        padding-left: 26px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    & .hero-title {
+      font-family: Montserrat;
+      font-weight: 600;
+      font-style: SemiBold;
+      font-size: 14px;
+      leading-trim: NONE;
+      line-height: 100%;
+      letter-spacing: 0%;
+
+    }
+
+    & .hero-text-wrap {
+      flex-direction: column;
+      gap: 20px;
+      border-left: 3px solid #fff;
+
+      & p {
+        font-family: Montserrat;
+        font-weight: 500;
+        font-style: Medium;
+        font-size: 10px;
+        leading-trim: NONE;
+        line-height: 100%;
+        letter-spacing: 0%;
+        border: none !important;
+        width: 136px;
+        text-align: left;
+        margin-left: 25px;
+        padding: 0 !important;
+      }
+    }
+
+    & .hero-search{
+      width: 200px;
+    }
+
+
+  }
 }
 
 .hero-wrap {
@@ -56,11 +131,12 @@
   }
 }
 
-.hero-form{
+.hero-form {
   margin-top: 40px;
   display: flex;
 }
-.hero-search{
+
+.hero-search {
   width: 500px;
   height: 40px;
   border-bottom-left-radius: 30px;
@@ -75,11 +151,13 @@
   letter-spacing: 0%;
   color: #000000;
   background-color: #D9D9D9;
-  &:focus{
+
+  &:focus {
     background-color: #FFA14A;
   }
 }
-.hero-search-btn{
+
+.hero-search-btn {
   width: 40px;
   height: 40px;
   border-bottom-right-radius: 30px;
@@ -90,11 +168,13 @@
   justify-content: center;
   align-items: center;
   border-left: 3px solid #000000;
+
   & img {
-    width: 20px ;
+    width: 20px;
     height: 20px;
     background: none;
   }
+
   &:hover {
     cursor: pointer;
     background-color: #FFA14A;

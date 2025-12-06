@@ -1,5 +1,8 @@
 .pets{
     margin-top: 90px !important;
+    @media screen and (max-width:1440px){
+        display: none;
+    }
 }
 
 .pets-item {

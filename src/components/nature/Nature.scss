@@ -1,3 +1,8 @@
+.nature{
+  @media screen and (max-width: 1440px){
+    display: none;
+  }
+}
 .nature-slider .splide__slide {
   opacity: 0.45;
   transform: scale(0.9);

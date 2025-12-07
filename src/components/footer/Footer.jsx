@@ -18,9 +18,9 @@ export const Footer = () => {
                     <div className='contact-wrap'>
                         <p className='contact-name'>Contact us</p>
                         <ul className='contact-list'>
-                            <li className='contact-item'><a href="#"><img src={inst} alt="" /></a></li>
-                            <li className='contact-item'><a href="#"><img src={fb} alt="" /></a></li>
-                            <li className='contact-item'><a href="#"><img src={ws} alt="" /></a></li>
+                            <li className='contact-item'><a href="https://instegram.com"><img src={inst} alt="" /></a></li>
+                            <li className='contact-item'><a href="https://facebook.com"><img src={fb} alt="" /></a></li>
+                            <li className='contact-item'><a href="https://whatsapp.com"><img src={ws} alt="" /></a></li>
                         </ul>
                     </div>
                 </div>

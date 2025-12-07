@@ -1,7 +1,3 @@
-import pets1 from "../../img/pets1.png";
-import pets2 from "../../img/pets2.png";
-import pets3 from "../../img/pets3.png";
-import pets4 from "../../img/pets4.png";
 import { useState, useEffect } from "react";
 import './Pets.scss';
 
@@ -26,7 +22,9 @@ export const Pets = () => {
             apiKey: apikey,
             page: '1',
             pageSize: '4',
-            searchIn: 'title'
+            searchIn: 'title',
+            lang: 'en',
+            from: from,
         });
 
         const url = `https://newsapi.org/v2/everything?${params.toString()}`;
@@ -36,7 +34,7 @@ export const Pets = () => {
                 const res = await fetch(url);
                 const text = await res.text();
                 let json = null;
-                try { json = JSON.parse(text); } catch {}
+                try { json = JSON.parse(text); } catch { }
 
                 if (!res.ok) {
                     let msg = `NewsAPI error ${res.status}`;
@@ -75,7 +73,7 @@ export const Pets = () => {
                     </li>
                 ))}
             </ul>
-            <button type="button" className="pets-btn">See more</button>
+            <a href="https://newsapi.org/"> <button type="button" className="pets-btn" >See more</button></a>
         </section>
     );
 };

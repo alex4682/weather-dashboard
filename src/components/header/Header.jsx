@@ -42,7 +42,7 @@ export const Header = ({ isLoggined, setIsLoggined }) => {
                     {isLoggined ? <> <button className='sign-in-btn' onClick={() => { setUnloginactive(true) }}>Unlog in</button> <p className='username'>{username}</p></> :
                         <button className="sign-in-btn" onClick={() => setIsActive(true)}>Sign Up</button>
                     }
-                    <img src={userPhoto} alt="User profile" />
+                    <img src={userPhoto} alt="User profile" className={isLoggined ? "": "hidden"}/>
                 </div>
             </div>
             <SignInModal isActive={isActive} isLoggined={isLoggined} setIsActive={setIsActive} setIsLoggined={setIsLoggined} setUsername={setUsername} setEmail={setEmail} setPassword={setPassword} />

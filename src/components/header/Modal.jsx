@@ -58,7 +58,7 @@ export const SignInModal = ({ isActive, isLoggined, setIsLoggined, setIsActive, 
             <div className={`modal-backdrop ${isActive ? 'active' : ''}`} onClick={handleClose}>
                 <div className="modal" onClick={(e) => e.stopPropagation()}>
                     <h2 className="modal-title">Sign up</h2>
-                    {error && <div className="modal-error" role="alert">{error}</div>}
+                    {error && <div className="error" role="alert">{error}</div>}
                     <form action="" className="modal-form" onSubmit={handleSubmit}>
                         <div className="signin-modal-form-wrap">
                             <label htmlFor="signup-username">Username</label>

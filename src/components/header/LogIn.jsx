@@ -4,7 +4,7 @@ export const LogIn = ({ isActive = false, setIsActive }) => {
     const api = "https://6922ebe409df4a492323b3f6.mockapi.io/weather/users";
     const [emailQ, setEmailQ] = useState('');
     const [passwordQ, setPasswordQ] = useState('');
-    const [error, setError] = useState('');
+    const [error1, setError] = useState('');
     const handleClose = () => {
         try { if (setIsActive) setIsActive(false); } catch { }
         document.querySelector(".modal-backdrop").classList.add("active")
@@ -33,6 +33,7 @@ export const LogIn = ({ isActive = false, setIsActive }) => {
                 }}>
                     <div className="modal-group">
                         <label htmlFor="email">Email</label>
+                        <p className='error'>{error1}</p>
                         <input type="email" id="email" name="email" required onChange={(e) => { setEmailQ(e.target.value) }} />
                     </div>
                     <div className="modal-group">

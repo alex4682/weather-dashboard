@@ -1,27 +1,23 @@
 {
   "files": {
-    "main.css": "/weather-dashboard/static/css/main.014c3476.css",
-    "main.js": "/weather-dashboard/static/js/main.a53f94ae.js",
-    "static/js/453.a8fdb84a.chunk.js": "/weather-dashboard/static/js/453.a8fdb84a.chunk.js",
+    "main.css": "/weather-dashboard/static/css/main.cc048efc.css",
+    "main.js": "/weather-dashboard/static/js/main.ff5884cf.js",
+    "static/js/453.f8dbaf78.chunk.js": "/weather-dashboard/static/js/453.f8dbaf78.chunk.js",
     "static/media/hero-bg.png": "/weather-dashboard/static/media/hero-bg.0d2868233890a8ffb414.png",
     "static/media/img1.png": "/weather-dashboard/static/media/img1.45d4277d1006c290211c.png",
-    "static/media/pets3.png": "/weather-dashboard/static/media/pets3.52d1f5e5994c81ddf3b4.png",
-    "static/media/pets2.png": "/weather-dashboard/static/media/pets2.6b2faab5f652f0c9afcd.png",
-    "static/media/pets4.png": "/weather-dashboard/static/media/pets4.20612d1f7b1e306102aa.png",
     "static/media/img4.png": "/weather-dashboard/static/media/img4.797bc64a1123e6bb7f13.png",
     "static/media/img2.png": "/weather-dashboard/static/media/img2.bd9e52536540418c3b2d.png",
     "static/media/img5.png": "/weather-dashboard/static/media/img5.e8c0fec2fe111a6a9e57.png",
     "static/media/pressure.svg": "/weather-dashboard/static/media/pressure.f689ea8a0aa3fa37d1014b0406e6ab0d.svg",
-    "static/media/pets1.png": "/weather-dashboard/static/media/pets1.27c6510a37889c2e4d0a.png",
     "static/media/img3.png": "/weather-dashboard/static/media/img3.5179c9d5e3f2512c5859.png",
     "static/media/symbol-defs.svg": "/weather-dashboard/static/media/symbol-defs.9fcbdbe8c7f15e484778edd5d742c634.svg",
     "index.html": "/weather-dashboard/index.html",
-    "main.014c3476.css.map": "/weather-dashboard/static/css/main.014c3476.css.map",
-    "main.a53f94ae.js.map": "/weather-dashboard/static/js/main.a53f94ae.js.map",
-    "453.a8fdb84a.chunk.js.map": "/weather-dashboard/static/js/453.a8fdb84a.chunk.js.map"
+    "main.cc048efc.css.map": "/weather-dashboard/static/css/main.cc048efc.css.map",
+    "main.ff5884cf.js.map": "/weather-dashboard/static/js/main.ff5884cf.js.map",
+    "453.f8dbaf78.chunk.js.map": "/weather-dashboard/static/js/453.f8dbaf78.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.014c3476.css",
-    "static/js/main.a53f94ae.js"
+    "static/css/main.cc048efc.css",
+    "static/js/main.ff5884cf.js"
   ]
 }

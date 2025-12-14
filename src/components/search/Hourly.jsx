@@ -18,7 +18,7 @@ export const Hourly = ({ hourlyData }) => {
                 datasets: [
                     {
                         label: "Temperature (°C)",
-                        data: hourlyData.map(d => d.temp),  // <-- FIX
+                        data: hourlyData.map(d => d.temp), 
                         borderWidth: 3,
                         spanGaps: true,
                         tension: 0.4,

@@ -14,6 +14,7 @@ export const SearchList = ({ searchQuery, isLoggined }) => {
     const [hourlyDay, setHourlyDay] = useState(null);
     const [hourlyIsActive, setHourlyIsActive] = useState(false);
     const [weaklyIsActive, setWeeklyIsActive] = useState(false);
+    const [hourlyData, setHourlyData] = useState([]);
     const apikey = "425a7152fd4aec5354729bd963878955";
 
     const getCountryName = (code) => {
@@ -55,6 +56,34 @@ export const SearchList = ({ searchQuery, isLoggined }) => {
 
         return () => { active = false; };
     }, [searchQuery, apikey]);
+
+    useEffect(() => {
+        if (!hourlyIsActive || hourlyDay === null || !data || !data.list) {
+            setHourlyData([]);
+            return;
+        }
+
+        const targetDate = getDateOffset(hourlyDay);
+        const targetDay = targetDate.getDate();
+        const targetMonth = targetDate.getMonth();
+        const targetYear = targetDate.getFullYear();
+
+        const hourlyForDay = data.list.filter(item => {
+            const forecastDate = new Date(item.dt * 1000);
+            return (
+                forecastDate.getDate() === targetDay &&
+                forecastDate.getMonth() === targetMonth &&
+                forecastDate.getFullYear() === targetYear
+            );
+        });
+
+        const formatted = hourlyForDay.map(item => ({
+            time: new Date(item.dt * 1000).toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' }),
+            temp: item.main.temp.toFixed(0)
+        }));
+
+        setHourlyData(formatted);
+    }, [hourlyIsActive, hourlyDay, data]);
 
     if (loading) return <ul className="search-list container"><li>Loading...</li></ul>;
     if (error) return <ul className="search-list container"><li>Error: {error}</li></ul>;
@@ -156,58 +185,22 @@ export const SearchList = ({ searchQuery, isLoggined }) => {
             weeklyData={getWeeklyData(getDate)}
         />;
     }
-    const getHourlyData = (dayOffset) => {
-        const start = new Date();
-        start.setHours(0, 0, 0, 0);
-        start.setDate(start.getDate() + dayOffset);
-
-        const end = new Date(start);
-        end.setDate(end.getDate() + 1);
-
-        const filtered = data.list.filter(item => {
-            const t = item.dt * 1000;
-            return t >= start.getTime() && t < end.getTime();
-        });
-
+    const getWeeklyData = () => {
         const result = [];
-        for (let h = 0; h < 24; h++) {
-            const hourDate = new Date(start);
-            hourDate.setHours(h);
-
-            const forecast = filtered.find(item => {
-                const t = new Date(item.dt * 1000);
-                return t.getHours() === h;
-            });
+        for (let d = 0; d < 8; d++) {
+            const forecast = getForecastForDay(d);
+            if (!forecast) continue;
 
             result.push({
-                time: hourDate.toLocaleTimeString("uk-UA", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                }),
-                temp: forecast
-                    ? Number(forecast.main.temp.toFixed(0))
-                    : null
+                date: new Date(forecast.dt * 1000).toLocaleDateString("en-US", { weekday: "short", day: "numeric", month: "short" }),
+                temp: forecast.main?.temp.toFixed(0),
+                feels_like: forecast.main?.feels_like.toFixed(0),
+                icon: forecast.weather?.[0]?.icon,
+                weather: forecast.weather || []
             });
         }
-
         return result;
     };
-    const getWeeklyData = () => {
-    const result = [];
-    for (let d = 0; d < 8; d++) {
-        const forecast = getForecastForDay(d);
-        if (!forecast) continue;
-
-        result.push({
-            date: new Date(forecast.dt * 1000).toLocaleDateString("en-US", { weekday: "short", day: "numeric", month: "short" }),
-            temp: forecast.main?.temp.toFixed(0),
-            feels_like: forecast.main?.feels_like.toFixed(0),
-            icon: forecast.weather?.[0]?.icon,
-            weather: forecast.weather || []
-        });
-    }
-    return result;
-};
 
 
 
@@ -215,7 +208,7 @@ export const SearchList = ({ searchQuery, isLoggined }) => {
 
     const renderHourly = (dayOffset) => {
         if (dayOffset === null) return null;
-        return <Hourly hourlyData={getHourlyData(dayOffset)} />;
+        return <Hourly hourlyData={hourlyData} />;
     };
 
 
@@ -234,7 +227,7 @@ export const SearchList = ({ searchQuery, isLoggined }) => {
 
             }
             {weaklyIsActive ?
-                renderWeekly(hourlyDay) 
+                renderWeekly(hourlyDay)
                 : null}
         </>
     );

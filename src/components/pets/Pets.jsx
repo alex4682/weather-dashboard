@@ -6,7 +6,7 @@ export const Pets = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const apikey = "5b3ff3eb33494302bba0b2f1d0e69902";
+    const apikey = "dcce3394636548d46ad216b8ea9db189";
 
     useEffect(() => {
         let active = true;
@@ -19,15 +19,16 @@ export const Pets = () => {
         const params = new URLSearchParams({
             q: 'pet',
             sortBy: 'publishedAt',
-            apiKey: apikey,
+            apikey: apikey,
             page: '1',
-            pageSize: '4',
+            max: '4',
             searchIn: 'title',
             lang: 'en',
             from: from,
+
         });
 
-        const url = `https://newsapi.org/v2/everything?${params.toString()}`;
+        const url = `https://gnews.io/api/v4/search?${params.toString()}`;
 
         (async () => {
             try {
@@ -68,7 +69,7 @@ export const Pets = () => {
             <ul className="pets-list">
                 {data.articles.map((article, index) => (
                     <li key={index} className="pets-item">
-                        {article.urlToImage && <img src={article.urlToImage} alt={article.title || 'Pet news'} />}
+                        {article.image && <img src={article.image} alt={article.title || 'Pet news'} />}
                         <h3>{article.title}</h3>
                     </li>
                 ))}
